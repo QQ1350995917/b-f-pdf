@@ -10,7 +10,7 @@ android:
     - '.*intel.+'
 
 jdk:
-  - jdk8
+  - oraclejdk8
 
 before_install:
 - sudo apt-get update -qq
