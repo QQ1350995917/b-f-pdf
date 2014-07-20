@@ -18,7 +18,7 @@ LOCAL_C_INCLUDES := \
 	$(MUPDF_ROOT)/source/fitz \
 	$(MUPDF_ROOT)/source/pdf
 LOCAL_CFLAGS :=
-LOCAL_MODULE    := mupdf
+LOCAL_MODULE    := android-pdf
 LOCAL_SRC_FILES := mupdf.c
 LOCAL_STATIC_LIBRARIES := mupdfcore mupdfthirdparty
 ifdef NDK_PROFILER

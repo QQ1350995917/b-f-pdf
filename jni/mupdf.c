@@ -15,10 +15,10 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
-#define JNI_FN(A) Java_com_artifex_mupdfdemo_ ## A
-#define PACKAGENAME "com/artifex/mupdfdemo"
+#define JNI_FN(A) Java_com_dingpw_android_pdf_ ## A
+#define PACKAGENAME "com/dingpw/android/pdf"
 
-#define LOG_TAG "libmupdf"
+#define LOG_TAG "libandroid-pdf"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define LOGT(...) __android_log_print(ANDROID_LOG_INFO,"alert",__VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
@@ -277,7 +277,7 @@ JNI_FN(MuPDFCore_openFile)(JNIEnv * env, jobject thiz, jstring jfilename)
 	jclass clazz;
 
 #ifdef NDK_PROFILER
-	monstartup("libmupdf.so");
+	monstartup("libandroid-pdf.so");
 #endif
 
 	clazz = (*env)->GetObjectClass(env, thiz);
@@ -418,7 +418,7 @@ JNI_FN(MuPDFCore_openBuffer)(JNIEnv * env, jobject thiz, jstring jmagic)
 	const char *magic;
 
 #ifdef NDK_PROFILER
-	monstartup("libmupdf.so");
+	monstartup("libandroid-pdf.so");
 #endif
 
 	clazz = (*env)->GetObjectClass(env, thiz);

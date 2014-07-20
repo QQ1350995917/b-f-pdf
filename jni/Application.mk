@@ -4,7 +4,7 @@
 
 # Version X: armeabi
 #APP_PLATFORM=android-8
-APP_ABI := armeabi
+#APP_ABI := armeabi
 
 # Version X+1: armeabi-v7a (Much faster due to the availability of hardware
 # FP, but cannot be run in the emulator).
