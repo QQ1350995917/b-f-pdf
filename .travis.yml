@@ -3,11 +3,7 @@ android:
   components:
     - build-tools-19.0.3
     - android-19
-    - sysimg-19
     - extra-android-support
-
-jdk:
-  - oraclejdk8
 
 before_install:
 - sudo apt-get update -qq
