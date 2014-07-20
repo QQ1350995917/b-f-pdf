@@ -5,9 +5,6 @@ android:
     - android-19
     - sysimg-19
     - extra-android-support
-  licenses:
-    - android-sdk-license-bcbbd656
-    - '.*intel.+'
 
 jdk:
   - oraclejdk8
