@@ -1,7 +1,16 @@
-language: java
+language: android
+android:
+  components:
+    - build-tools-19.0.3
+    - android-19
+    - sysimg-19
+    - extra-android-support
+  licenses:
+    - android-sdk-license-bcbbd656
+    - '.*intel.+'
+
 jdk:
   - jdk8
-  - jdk7
 
 before_install:
 - sudo apt-get update -qq
