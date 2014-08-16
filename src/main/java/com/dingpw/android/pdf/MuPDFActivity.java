@@ -22,6 +22,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
@@ -32,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
+import com.dingpw.android.setting.about.AboutView;
 
 class ThreadPerTaskExecutor implements Executor {
 	public void execute(Runnable r) {
@@ -350,9 +352,27 @@ public class MuPDFActivity extends Activity implements FilePicker.FilePickerSupp
 		}
 
 		createUI(savedInstanceState);
+
+        this.alertDialog = new AlertDialog.Builder(this).create();
 	}
 
-	public void requestPassword(final Bundle savedInstanceState) {
+    private AlertDialog alertDialog = null;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_MENU && !this.alertDialog.isShowing()){
+            this.alertDialog.show();
+            Window window = this.alertDialog.getWindow();
+            window.setContentView(new AboutView(this));
+            return true;
+        } else  if(keyCode == KeyEvent.KEYCODE_MENU && this.alertDialog.isShowing()){
+            this.alertDialog.dismiss();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void requestPassword(final Bundle savedInstanceState) {
 		mPasswordView = new EditText(this);
 		mPasswordView.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PASSWORD);
 		mPasswordView.setTransformationMethod(new PasswordTransformationMethod());
@@ -1104,7 +1124,6 @@ public class MuPDFActivity extends Activity implements FilePicker.FilePickerSupp
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == AlertDialog.BUTTON_POSITIVE)
 						core.save();
-
 					finish();
 				}
 			};

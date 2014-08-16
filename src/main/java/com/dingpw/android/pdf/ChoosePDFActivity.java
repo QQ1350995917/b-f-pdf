@@ -18,8 +18,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileObserver;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.ListView;
+import com.dingpw.android.setting.about.AboutView;
 
 enum Purpose {
 	PickPDF,
@@ -38,9 +41,12 @@ public class ChoosePDFActivity extends ListActivity {
 	private ChoosePDFAdapter adapter;
 	private Purpose      mPurpose;
 
+    private AlertDialog alertDialog = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        this.alertDialog = new AlertDialog.Builder(this).create();
 
 		mPurpose = PICK_KEY_FILE.equals(getIntent().getAction()) ? Purpose.PickKeyFile : Purpose.PickPDF;
 
@@ -221,4 +227,27 @@ public class ChoosePDFActivity extends ListActivity {
 		super.onPause();
 		mPositions.put(mDirectory.getAbsolutePath(), getListView().getFirstVisiblePosition());
 	}
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_MENU && !this.alertDialog.isShowing()){
+            this.alertDialog.show();
+            Window window = this.alertDialog.getWindow();
+            window.setContentView(new AboutView(this));
+            return true;
+        } else  if(keyCode == KeyEvent.KEYCODE_MENU && this.alertDialog.isShowing()){
+            this.alertDialog.dismiss();
+            return true;
+        } else if(keyCode == KeyEvent.KEYCODE_BACK){
+            this.finish();
+        }
+
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
 }
